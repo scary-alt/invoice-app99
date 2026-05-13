@@ -6,7 +6,9 @@ const qrcode = require("qrcode-terminal");
 const PDFDocument = require("pdfkit");
 const fs = require("fs");
 const path = require("path");
-
+const productsPath = "./data/products.json";
+const staffPath = "./data/staff.json";
+const invoicesPath = "./data/invoices.json";
 const app = express();
 
 app.use(cors());
