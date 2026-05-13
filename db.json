@@ -1,0 +1,32 @@
+{
+  "users": [
+    {
+      "id": "manager",
+      "pass": "1234",
+      "role": "manager"
+    },
+    {
+      "id": "gnane",
+      "pass": "998877",
+      "role": "staff"
+    },
+    {
+      "id": "gnane",
+      "pass": "998877",
+      "role": "staff"
+    }
+  ],
+  "products": [
+    {
+      "id": 1778504191767,
+      "name": "ro",
+      "price": 3200
+    },
+    {
+      "id": 1778504443615,
+      "name": "ro",
+      "price": 3200
+    }
+  ],
+  "invoices": []
+}

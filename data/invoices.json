@@ -1,0 +1,24 @@
+[
+  {
+    "customer": "rajammathalli services",
+    "phone": "7702101016",
+    "address": "srikakulam",
+    "gst": "",
+    "invoiceNo": "INV1778576273766",
+    "date": "12/5/2026",
+    "subtotal": "₹2711.86",
+    "gstTotal": "₹488.14",
+    "grandTotal": "₹3200.00",
+    "products": [
+      {
+        "product": "RO",
+        "qty": 1,
+        "baseRate": "2711.86",
+        "gst": "488.14",
+        "amount": "3200.00"
+      }
+    ],
+    "staff": "BALA",
+    "timestamp": "2026-05-12T08:58:19.507Z"
+  }
+]

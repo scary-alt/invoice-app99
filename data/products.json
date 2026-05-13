@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "name": "Server Maintenance",
+    "baseRate": 500
+  },
+  {
+    "id": 2,
+    "name": "Water Purifier Service",
+    "baseRate": 300
+  },
+  {
+    "id": 3,
+    "name": "AMC Renewal",
+    "baseRate": 2000
+  },
+  {
+    "id": 1778575507923,
+    "name": "RO",
+    "baseRate": 3200
+  },
+  {
+    "id": 1778575734508,
+    "name": "SEDIMENT",
+    "baseRate": 600
+  },
+  {
+    "id": 1778575867188,
+    "name": "CARBON",
+    "baseRate": 600
+  },
+  {
+    "id": 1778576260243,
+    "name": "INNER",
+    "baseRate": 475
+  }
+]
