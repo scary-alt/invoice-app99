@@ -10,6 +10,9 @@ const productsPath = "./data/products.json";
 const staffPath = "./data/staff.json";
 const invoicesPath = "./data/invoices.json";
 const app = express();
+const qrcode = require("qrcode");
+
+let latestQR = "";
 
 app.use(cors());
 app.use(bodyParser.json({ limit: "50mb" }));
@@ -71,17 +74,54 @@ const client = new Client({
         args: ['--no-sandbox', '--disable-setuid-sandbox']
     }
 });
-client.on("qr", qr => {
-    qrcode.generate(qr, { small: true });
-    console.log("📱 SCAN QR");
+const qrcode = require("qrcode");
+
+let latestQR = "";
+
+client.on("qr", async (qr) => {
+
+    latestQR = await qrcode.toDataURL(qr);
+
+    console.log("SCAN QR");
+
 });
 
+app.get("/qr", (req, res) => {
+
+    if (!latestQR) {
+        return res.send("QR not generated yet");
+    }
+
+    res.send(`
+        <html>
+            <body style="display:flex;justify-content:center;align-items:center;height:100vh;background:#111;">
+                <img src="${latestQR}" />
+            </body>
+        </html>
+    `);
+
+});
 client.on("ready", () => {
     console.log("✅ WHATSAPP READY");
 });
 
 client.initialize();
 
+app.get("/qr", async (req, res) => {
+    try {
+        const qr = await qrcode.toDataURL("test");
+
+        res.send(`
+            <html>
+                <body style="display:flex;justify-content:center;align-items:center;height:100vh;background:#111;">
+                    <img src="${qr}" />
+                </body>
+            </html>
+        `);
+    } catch (err) {
+        res.send("QR Error");
+    }
+});
 // =========================
 // AUTH
 // =========================
