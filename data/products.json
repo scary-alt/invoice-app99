@@ -1,18 +1,8 @@
 [
   {
-    "id": 1,
-    "name": "Server Maintenance",
-    "baseRate": 500
-  },
-  {
     "id": 2,
     "name": "Water Purifier Service",
     "baseRate": 300
-  },
-  {
-    "id": 3,
-    "name": "AMC Renewal",
-    "baseRate": 2000
   },
   {
     "id": 1778575507923,

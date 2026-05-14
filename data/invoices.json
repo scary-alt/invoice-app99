@@ -1,6 +1,56 @@
 [
   {
     "customer": "rajammathalli services",
+    "phone": "9440756347",
+    "address": "srikakulam",
+    "gst": "",
+    "invoiceNo": "INV1778726561836",
+    "date": "14/5/2026",
+    "subtotal": "₹4385.58",
+    "gstTotal": "₹789.42",
+    "grandTotal": "₹5175.00",
+    "products": [
+      {
+        "product": "SEDIMENT",
+        "qty": 1,
+        "baseRate": "508.47",
+        "gst": "91.53",
+        "amount": "600.00"
+      },
+      {
+        "product": "CARBON",
+        "qty": 1,
+        "baseRate": "508.47",
+        "gst": "91.53",
+        "amount": "600.00"
+      },
+      {
+        "product": "RO",
+        "qty": 1,
+        "baseRate": "2711.86",
+        "gst": "488.14",
+        "amount": "3200.00"
+      },
+      {
+        "product": "INNER",
+        "qty": 1,
+        "baseRate": "402.54",
+        "gst": "72.46",
+        "amount": "475.00"
+      },
+      {
+        "product": "Water Purifier Service",
+        "qty": 1,
+        "baseRate": "254.24",
+        "gst": "45.76",
+        "amount": "300.00"
+      }
+    ],
+    "staff": "manager",
+    "timestamp": "2026-05-14T02:43:16.516Z"
+  },
+  {
+    "customer": "rajammathalli services",
     "phone": "7702101016",
     "address": "srikakulam",
     "gst": "",
