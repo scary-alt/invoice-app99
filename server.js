@@ -66,13 +66,11 @@ let invoicesHistory = readJSON("invoices.json");
 // =========================
 
 const client = new Client({
-    authStrategy: new LocalAuth(),
     puppeteer: {
-        headless: false,
-        args: ["--no-sandbox", "--disable-setuid-sandbox"]
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox']
     }
 });
-
 client.on("qr", qr => {
     qrcode.generate(qr, { small: true });
     console.log("📱 SCAN QR");
