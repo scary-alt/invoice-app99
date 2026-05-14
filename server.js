@@ -10,7 +10,7 @@ const productsPath = "./data/products.json";
 const staffPath = "./data/staff.json";
 const invoicesPath = "./data/invoices.json";
 const app = express();
-const qrcode = require("qrcode");
+const QRCode = require("qrcode");
 
 let latestQR = "";
 
@@ -74,13 +74,13 @@ const client = new Client({
         args: ['--no-sandbox', '--disable-setuid-sandbox']
     }
 });
-const qrcode = require("qrcode");
+const QRCode = require("qrcode");
 
 let latestQR = "";
 
 client.on("qr", async (qr) => {
 
-    latestQR = await qrcode.toDataURL(qr);
+    latestQR = await QRCode.toDataURL(qr);
 
     console.log("SCAN QR");
 
