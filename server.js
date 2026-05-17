@@ -92,6 +92,26 @@ client.on("authenticated", () => {
 
 client.initialize();
 
+client.on("auth_failure", msg => {
+    console.log("AUTH FAILURE:", msg);
+});
+
+client.on("disconnected", reason => {
+    console.log("CLIENT DISCONNECTED:", reason);
+});
+
+client.on("change_state", state => {
+    console.log("STATE:", state);
+});
+
+process.on("uncaughtException", err => {
+    console.log("UNCAUGHT EXCEPTION:", err);
+});
+
+process.on("unhandledRejection", err => {
+    console.log("UNHANDLED REJECTION:", err);
+});
+
 client.on("ready", () => {
     console.log("WhatsApp Ready!");
     clientReady = true;
