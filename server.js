@@ -76,7 +76,7 @@ const client = new Client({
     }
 });
 
-
+client.initialize();
 
 
 
@@ -86,6 +86,10 @@ client.on("qr", async (qr) => {
   latestQR = await qrcode.toDataURL(qr);
 
   console.log("SCAN QR");
+});
+
+client.on("ready", () => {
+  console.log("WhatsApp Ready");
 });
 
 app.get("/qr", (req, res) => {
