@@ -107,31 +107,57 @@ client.on("ready", () => {
   console.log("WhatsApp Ready");
 });
 
-app.get("/qr", (req, res) => {
+app.get("/qr", async (req, res) => {
 
-    if (clientReady) {
-        return res.send(`
-            <h2>WhatsApp Connected Successfully ✅</h2>
+    try {
+
+        if (clientReady) {
+            return res.send(`
+                <h2>WhatsApp Connected Successfully ✅</h2>
+            `);
+        }
+
+        if (!latestQR) {
+            return res.send(`
+                <h2>Generating QR Code...</h2>
+                <p>Please refresh after 5 seconds</p>
+            `);
+        }
+
+        res.setHeader("Content-Type", "text/html");
+
+        return res.end(`
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>WhatsApp QR</title>
+            </head>
+            <body style="display:flex;justify-content:center;align-items:center;height:100vh;font-family:Arial;background:#111;color:white;">
+                <div style="text-align:center;">
+                    <h2>Scan QR with WhatsApp</h2>
+
+                    <img 
+                        src="${latestQR}" 
+                        width="300"
+                        height="300"
+                    />
+
+                    <p>Refresh if QR expires</p>
+                </div>
+            </body>
+            </html>
+        `);
+
+    } catch (err) {
+
+        console.log("QR PAGE ERROR:", err);
+
+        return res.status(500).send(`
+            <h2>QR Error</h2>
+            <pre>${err.message}</pre>
         `);
     }
 
-    if (!latestQR) {
-        return res.send(`
-            <h2>Generating QR Code...</h2>
-            <p>Please refresh after 5 seconds</p>
-        `);
-    }
-
-    res.send(`
-        <html>
-        <body style="display:flex;justify-content:center;align-items:center;height:100vh;font-family:Arial;">
-            <div style="text-align:center;">
-                <h2>Scan QR with WhatsApp</h2>
-                <img src="${latestQR}" />
-            </div>
-        </body>
-        </html>
-    `);
 });
 // ================================
 // WHATSAPP
