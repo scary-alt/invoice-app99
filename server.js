@@ -14,6 +14,8 @@ const app = express();
 
 let latestQR = "";
 
+let clientReady = false;
+
 app.use(cors());
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(express.static(__dirname));
@@ -88,7 +90,10 @@ client.on("authenticated", () => {
 
 client.initialize();
 
-
+client.on("ready", () => {
+    console.log("WhatsApp Ready!");
+    clientReady = true;
+});
 
 
 client.on("qr", async (qr) => {
@@ -104,24 +109,30 @@ client.on("ready", () => {
 
 app.get("/qr", (req, res) => {
 
+    if (clientReady) {
+        return res.send(`
+            <h2>WhatsApp Connected Successfully ✅</h2>
+        `);
+    }
+
     if (!latestQR) {
-        return res.send("QR not generated yet");
+        return res.send(`
+            <h2>Generating QR Code...</h2>
+            <p>Please refresh after 5 seconds</p>
+        `);
     }
 
     res.send(`
         <html>
-            <body style="display:flex;justify-content:center;align-items:center;height:100vh;background:#111;">
+        <body style="display:flex;justify-content:center;align-items:center;height:100vh;font-family:Arial;">
+            <div style="text-align:center;">
+                <h2>Scan QR with WhatsApp</h2>
                 <img src="${latestQR}" />
-            </body>
+            </div>
+        </body>
         </html>
     `);
 });
-client.on("ready", () => {
-    console.log("✅ WHATSAPP READY");
-});
-
-client.initialize();
-
 // ================================
 // WHATSAPP
 // ================================
