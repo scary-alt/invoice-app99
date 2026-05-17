@@ -636,23 +636,33 @@ writeJSON("invoices.json", invoicesHistory);
 // =========================
 app.get("/qr", (req, res) => {
 
-  if (!latestQR) {
-    return res.send("QR not generated yet");
-  }
+    if (clientReady) {
+        return res.send(`
+            <h2>WhatsApp Connected Successfully ✅</h2>
+        `);
+    }
 
-  res.send(`
-    <html>
-      <body style="
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        height:100vh;
-        background:#111;
-      ">
-        <img src="${latestQR}" />
-      </body>
-    </html>
-  `);
+    if (!latestQR) {
+        return res.send(`
+            <h2>Generating QR Code...</h2>
+            <p>Refresh after 5 seconds</p>
+        `);
+    }
+
+    res.send(`
+        <html>
+        <body style="font-family:Arial;text-align:center;padding-top:40px;">
+            <h2>Scan QR with WhatsApp</h2>
+
+            <img 
+                src="${latestQR}" 
+                width="300"
+                height="300"
+            />
+
+        </body>
+        </html>
+    `);
 });
 
 const PORT = process.env.PORT || 3000;
