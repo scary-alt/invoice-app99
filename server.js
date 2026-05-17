@@ -12,7 +12,6 @@ const staffPath = "./data/staff.json";
 const invoicesPath = "./data/invoices.json";
 const app = express();
 
-
 let latestQR = "";
 
 app.use(cors());
@@ -83,8 +82,10 @@ const client = new Client({
 
 
 client.on("qr", async (qr) => {
-    latestQR = await QRCode.toDataURL(qr);
-    console.log("SCAN QR");
+
+  latestQR = await qrcode.toDataURL(qr);
+
+  console.log("SCAN QR");
 });
 
 app.get("/qr", (req, res) => {
