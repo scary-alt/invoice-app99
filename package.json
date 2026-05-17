@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
- "scripts": {
-  "start": "node server.js",
-"postinstall": "npx puppeteer browsers install chrome"
-},
+  "scripts": {
+    "start": "node server.js",
+    "postinstall": "npx puppeteer browsers install chrome"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
