@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const { Client, LocalAuth, MessageMedia } = require("whatsapp-web.js");
+const { Client, NoAuth, MessageMedia } = require("whatsapp-web.js");
 const qrcode = require("qrcode");
 const QRCode = require("qrcode");
 const PDFDocument = require("pdfkit");
@@ -69,17 +69,15 @@ let invoicesHistory = readJSON("invoices.json");
 // =========================
 
 const client = new Client({
-  authStrategy: new LocalAuth({
-    clientId: "invoice-app"
-  }),
+  authStrategy: new NoAuth(),
 
   puppeteer: {
     headless: true,
     args: [
-      '--no-sandbox',
-      '--disable-setuid-sandbox',
-      '--disable-dev-shm-usage',
-      '--disable-gpu'
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage",
+      "--disable-gpu"
     ]
   }
 });
