@@ -3,6 +3,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const { Client, LocalAuth, MessageMedia } = require("whatsapp-web.js");
 const qrcode = require("qrcode-terminal");
+const QRCode = require("qrcode");
 const PDFDocument = require("pdfkit");
 const fs = require("fs");
 const path = require("path");
@@ -10,7 +11,7 @@ const productsPath = "./data/products.json";
 const staffPath = "./data/staff.json";
 const invoicesPath = "./data/invoices.json";
 const app = express();
-const QRCode = require("qrcode");
+
 
 let latestQR = "";
 
@@ -69,21 +70,21 @@ let invoicesHistory = readJSON("invoices.json");
 // =========================
 
 const client = new Client({
+    authStrategy: new LocalAuth(),
     puppeteer: {
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox']
     }
 });
-const QRCode = require("qrcode");
 
-let latestQR = "";
+
+
+
+
 
 client.on("qr", async (qr) => {
-
     latestQR = await QRCode.toDataURL(qr);
-
     console.log("SCAN QR");
-
 });
 
 app.get("/qr", (req, res) => {
@@ -99,7 +100,6 @@ app.get("/qr", (req, res) => {
             </body>
         </html>
     `);
-
 });
 client.on("ready", () => {
     console.log("✅ WHATSAPP READY");
@@ -107,21 +107,13 @@ client.on("ready", () => {
 
 client.initialize();
 
-app.get("/qr", async (req, res) => {
-    try {
-        const qr = await qrcode.toDataURL("test");
+// ================================
+// WHATSAPP
+// ================================
 
-        res.send(`
-            <html>
-                <body style="display:flex;justify-content:center;align-items:center;height:100vh;background:#111;">
-                    <img src="${qr}" />
-                </body>
-            </html>
-        `);
-    } catch (err) {
-        res.send("QR Error");
-    }
-});
+
+
+
 // =========================
 // AUTH
 // =========================
@@ -569,6 +561,8 @@ writeJSON("invoices.json", invoicesHistory);
 // START SERVER
 // =========================
 
-app.listen(3000, () => {
-    console.log("🚀 Server Running: https://stick-abreast-gratuity.ngrok-free.dev");
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+    console.log(`Server Running on port ${PORT}`);
 });
