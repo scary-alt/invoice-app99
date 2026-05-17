@@ -69,11 +69,23 @@ let invoicesHistory = readJSON("invoices.json");
 // =========================
 
 const client = new Client({
-    authStrategy: new LocalAuth(),
-    puppeteer: {
-        headless: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox']
-    }
+  authStrategy: new LocalAuth({
+    clientId: "invoice-app"
+  }),
+
+  puppeteer: {
+    headless: true,
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-gpu'
+    ]
+  }
+});
+
+client.on("authenticated", () => {
+  console.log("WhatsApp Authenticated");
 });
 
 client.initialize();
