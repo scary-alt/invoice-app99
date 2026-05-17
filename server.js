@@ -560,9 +560,30 @@ writeJSON("invoices.json", invoicesHistory);
 // =========================
 // START SERVER
 // =========================
+app.get("/qr", (req, res) => {
+
+  if (!latestQR) {
+    return res.send("QR not generated yet");
+  }
+
+  res.send(`
+    <html>
+      <body style="
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        height:100vh;
+        background:#111;
+      ">
+        <img src="${latestQR}" />
+      </body>
+    </html>
+  `);
+});
 
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-    console.log(`Server Running on port ${PORT}`);
-});
+  console.log(`Server Running on port ${PORT}`);
+}); 
+
